@@ -6,6 +6,6 @@ if __name__ == "__main__":
 
     count = len(sys.argv) - 1
     sume = 0
-    for i in range(count)
+    for i in range(count):
         sume = sume + int(sys.argv[i + 1])
     print("{}".format(sume))
