@@ -90,9 +90,12 @@ class Rectangle(Base):
 
     def display(self):
         """Print the Rectangle using the `#` character."""
+        for _ in range(self.__y):
+            print()
+
         for _ in range(self.__height):
-            [print("#", end="") for _ in range(self.__width)]
-            print("", end="\n")
+            print(" " * self.__x, end="")
+            print("#" * self.__width)
 
     def __str__(self):
         """Custom string representation for Rectangle.
