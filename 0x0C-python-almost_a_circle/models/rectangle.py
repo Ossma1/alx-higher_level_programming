@@ -30,27 +30,40 @@ class Rectangle(Base):
         self.y = y
         super().__init__(id)
 
-    def get_width(self):
+    @property
+    def width(self):
         return self.__width
 
-    def get_height(self):
+    @width.setter
+    def width(self, value):
+        if value >= 0:
+            self.__width = value
+        else:
+            raise ValueError("Width cannot be negative.")
+
+    @property
+    def height(self):
         return self.__height
 
-    def get_x(self):
+    @height.setter
+    def height(self, value):
+        if value >= 0:
+            self.__height = value
+        else:
+            raise ValueError("Height cannot be negative.")
+
+    @property
+    def x(self):
         return self.__x
 
-    def get_y(self):
+    @x.setter
+    def x(self, value):
+        self.__x = value
+
+    @property
+    def y(self):
         return self.__y
 
-    # Setter methods
-    def set_width(self, width):
-        self.__width = width
-
-    def set_height(self, height):
-        self.__height = height
-
-    def set_x(self, x):
-        self.__x = x
-
-    def set_y(self, y):
-        self.__y = y
+    @y.setter
+    def y(self, value):
+        self.__y = value
