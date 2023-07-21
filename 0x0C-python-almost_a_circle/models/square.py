@@ -1,7 +1,5 @@
+#!/usr/bin/python3
 """Defines a rectangle model class."""
-import json
-import csv
-import turtle
 from models.rectangle import Rectangle
 
 
