@@ -105,7 +105,7 @@ class Rectangle(Base):
         """
         return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
    
-    def update(self, *args):
+    def update(self, *args , **kwargs):
         """Update the rectangle
 
         Args:
@@ -117,14 +117,28 @@ class Rectangle(Base):
                 - 5th argument represents y attribute
             **kwargs (dict): New key/value pairs of attributes.
         """
-        if len(args) > 0:
-            self.id = args[0]
-            if len(args) > 1:
-                self.width = args[1]
-                if len(args) > 2:
-                    self.height = args[2]
-                    if len(args) > 3:
-                        self.x = args[3]
-                        if len(args) > 4:
-                            self.y = args[4]
+        if len(kwargs) > 0:
+            for key, value in kwargs.items():
+                attributes = {
+                    "id": lambda v: setattr(self, "id", v) if v is not None else self.__init__(self.width, self.height, self.x, self.y),
+                    "width": lambda v: setattr(self, "width", v),
+                    "height": lambda v: setattr(self, "height", v),
+                    "x": lambda v: setattr(self, "x", v),
+                    "y": lambda v: setattr(self, "y", v),
+                }
+
+                update_attribute_func = attributes.get(key)
+                if update_attribute_func:
+                    update_attribute_func(value)
                         
+        else :
+            if len(args) > 0:
+                self.id = args[0]
+                if len(args) > 1:
+                    self.width = args[1]
+                    if len(args) > 2:
+                        self.height = args[2]
+                        if len(args) > 3:
+                            self.x = args[3]
+                            if len(args) > 4:
+                                self.y = args[4]               
