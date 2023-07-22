@@ -23,7 +23,7 @@ class Rectangle(Base):
         """Initialize a new Rectangle.
 
         """
-
+        print (id,"Rectangle.__init__")
         self.__width = width
         self.__height = height
         self.__x = x

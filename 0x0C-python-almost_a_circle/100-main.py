@@ -25,6 +25,7 @@ if __name__ == "__main__":
     print("---")
 
     s1 = Square(5)
+    print(s1.id)
     s2 = Square(7, 9, 1)
     list_squares_input = [s1, s2]
 
