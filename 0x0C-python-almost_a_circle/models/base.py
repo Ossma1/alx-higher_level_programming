@@ -103,3 +103,51 @@ class Base:
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
+    @classmethod    
+    def save_to_file_csv(cls, list_objs):
+        """Insérer des données dans un fichier CSV.
+
+        Args:
+            cls (class): La classe dont les objets sont insérés.
+            list_objs (list): Liste des objets à insérer dans le fichier CSV.
+        """
+        fn = cls.__name__ + ".csv"
+        if cls.__name__ == "Rectangle":
+            field_names = ["id","width", "height", "x", "y"]
+        else:
+            field_names = ["id","size", "x", "y"]
+        with open(fn, mode='w', newline='') as csv_file:
+            writer = csv.DictWriter(csv_file, fieldnames=field_names)
+
+            writer.writeheader()
+
+            if list_objs is not None:
+                for obj in list_objs:
+                    obj_dict = obj.to_dictionary()
+                    writer.writerow(obj_dict)
+    @classmethod
+    def load_from_file_csv(cls):
+        """Charger des données à partir d'un fichier CSV dans une liste d'objets.
+
+        Returns:
+            list: Liste d'objets chargée à partir du fichier CSV.
+        """
+        fn = cls.__name__ + ".csv"
+        if cls.__name__ == "Rectangle":
+            field_names = ["id","width", "height", "x", "y"]
+        else:
+            field_names = ["id","size", "x", "y"]
+        liste_objets = []
+
+        with open(fn, mode='r', newline='') as csv_file:
+            reader = csv.DictReader(csv_file, fieldnames=field_names)
+
+            # Ignorer la première ligne (en-têtes) car elle ne contient pas d'objets
+            next(reader)
+
+            for row in reader:
+                # Créer un nouvel objet à partir des données du dictionnaire row
+                nouvel_objet = cls(**row)
+                liste_objets.append(nouvel_objet)
+
+        return liste_objets
